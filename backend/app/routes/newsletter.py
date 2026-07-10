@@ -1,8 +1,5 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-
-from app.database import get_db
-from app.models.newsletter import Newsletter
+from fastapi import APIRouter, HTTPException
+from app.supabase_client import supabase
 from app.schemas.newsletter import (
     NewsletterCreate,
     NewsletterResponse,
@@ -16,26 +13,32 @@ router = APIRouter(
 @router.post("/", response_model=NewsletterResponse)
 def subscribe_newsletter(
     newsletter: NewsletterCreate,
-    db: Session = Depends(get_db),
 ):
-    existing = (
-        db.query(Newsletter)
-        .filter(Newsletter.email == newsletter.email)
-        .first()
+    # Query supabase
+    response = (
+        supabase.table("newsletter_subscribers")
+        .select("*")
+        .eq("email", newsletter.email)
+        .execute()
     )
 
-    if existing:
+    if response.data:
         raise HTTPException(
             status_code=409,
             detail="Email already subscribed."
         )
 
-    new_subscriber = Newsletter(
-        email=newsletter.email,
+    # Insert subscriber
+    insert_response = (
+        supabase.table("newsletter_subscribers")
+        .insert({"email": newsletter.email})
+        .execute()
     )
 
-    db.add(new_subscriber)
-    db.commit()
-    db.refresh(new_subscriber)
+    if not insert_response.data:
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to subscribe email."
+        )
 
-    return new_subscriber
+    return insert_response.data[0]

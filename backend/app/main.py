@@ -1,11 +1,6 @@
 from fastapi import FastAPI
 
 from app.config import settings
-from app.database import Base, engine
-
-import app.models
-
-Base.metadata.create_all(bind=engine)
 
 from app.routes.contact import router as contact_router
 from app.routes.newsletter import router as newsletter_router
