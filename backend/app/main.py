@@ -32,8 +32,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://digiscale-infotech.vercel.app",   # Vercel URL
-        "https://digiscaleinfotech.com",           # Future custom domain
+        "https://digiscale-gamma.vercel.app",
+        "https://digiscaleinfotech.com",
         "https://www.digiscaleinfotech.com",
     ],
     allow_credentials=True,
