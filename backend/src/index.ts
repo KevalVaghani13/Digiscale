@@ -9,12 +9,26 @@ import { careerRouter } from "./routes/career.js";
 const app = express();
 
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://digiscale-gamma.vercel.app",
-    "https://digiscaleinfotech.com",
-    "https://www.digiscaleinfotech.com",
-  ],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      "https://digiscale-gamma.vercel.app",
+      "https://digiscaleinfotech.com",
+      "https://www.digiscaleinfotech.com",
+    ];
+
+    const isAllowed = allowedOrigins.includes(origin) || 
+                      origin.endsWith(".vercel.app") || 
+                      /^http:\/\/localhost:\d+$/.test(origin);
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
