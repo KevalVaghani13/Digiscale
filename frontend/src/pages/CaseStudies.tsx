@@ -3,10 +3,16 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+import project1 from "@/assets/Portfolio/project1.png";
+import project2 from "@/assets/Portfolio/project2.png";
+import project3 from "@/assets/Portfolio/project3.png";
+import project4 from "@/assets/Portfolio/project4.png";
+import project5 from "@/assets/Portfolio/project5.png";
+
 export const projects = [
   
   {
-    image: "/src/assets/Portfolio/project1.png",
+    image: project1,
     industry: "Shopify Store",
     name: "SkyParrow",
     stack: ["Shopify", "Liquid", "HTML", "CSS", "JavaScript"],
@@ -15,7 +21,7 @@ export const projects = [
     result: "Better Customer Experience, Improved Brand Presence, Ready for Online Growth",
   },
   {
-    image: "/src/assets/Portfolio/project5.png",
+    image: project5,
     industry: "Business Management Software",
     name: "TexaFlow Textile ERP",
     stack: ["C#", "ASP.NET", "SQL Server", "Azure"],
@@ -24,7 +30,7 @@ export const projects = [
     result: "Streamlined daily operations, reduced manual work, and improved overall business efficiency.",
   },
   {
-    image: "/src/assets/Portfolio/project2.png",
+    image: project2,
     industry: "Diamond Industry",
     name: "Stienhardt Stone",
     stack: ["Figma", "Adobe Illustrator", "Photoshop"],
@@ -33,7 +39,7 @@ export const projects = [
     result: "Strengthened the brand's online presence and delivered a premium digital experience for customers.",
   },
   {
-    image: "/src/assets/Portfolio/project4.png",
+    image: project4,
     industry: "Shopify Store",
     name: "ByRavina",
     stack: ["Shopify", "Liquid", "HTML", "CSS", "JavaScript"],
@@ -42,7 +48,7 @@ export const projects = [
     result: "Enhanced the brand's online presence and delivered a smooth shopping experience that builds customer confidence.",
   },
   {
-    image: "/src/assets/Portfolio/project3.png",
+    image: project3,
     industry: "Custom Software",
     name: "4 Ever Interior Gallery",
     stack: ["Next.js", "Python", "FastAPI", "PostgreSQL", "AWS"],
